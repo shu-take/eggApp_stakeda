@@ -12,6 +12,15 @@ import egg03 from './assets/egg03.png';
 
 export default function App() {
   const [count, setCount] = React.useState(100);
+
+  let countDown = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    } else {
+      setCount(count + 100);
+    }
+  };
+
   interface Result {
     msg: string | number;
     img: Object;
@@ -35,29 +44,19 @@ export default function App() {
 
   if (count <= 50 && count > 0) {
     result.img = egg02;
-  } else if(count === 0) {
+  } else if (count === 0) {
     result.img = egg03;
   }
 
-  if (count > 0) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.count}>{result.msg}</Text>
-        <TouchableOpacity onPress={() => setCount(count - 1)}>
-          <Image source={result.img} style={styles.logo} />
-        </TouchableOpacity>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.count}>{result.msg}</Text>
-        <TouchableOpacity onPress={() => setCount(count + 100)}>
-          <Image source={result.img} style={styles.logo} />
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.count}>{result.msg}</Text>
+      <TouchableOpacity onPress={() => countDown()}>
+        <Image source={result.img} style={styles.logo} />
+      </TouchableOpacity>
+    </View>
+  );
+
 }
 
 const styles = StyleSheet.create({
